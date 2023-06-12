@@ -13,9 +13,8 @@ const createUser = async (req, res, next) => {
       
         
     } catch (error) {
-        console.log(error);
-        res.status(400).json(error);
-    }
+        next(error);
+        }
 }
 
 //Ver todos los usuarios
@@ -24,7 +23,7 @@ const getAllUsers = async (req, res, next)=>{
         const users = await Users.findAndCountAll();
         res.json(users);
     } catch(error){
-        res.status(400).json(error);
+        next(error);
     }
 
 }
@@ -37,7 +36,7 @@ const deleteUser = async (req, res, next)=>{
         res.send(204).send();
         
     } catch(error){
-        res.sendStatus(400);
+        next(error);
     }
 
 }
@@ -76,7 +75,7 @@ const userLogin = async (req,res,next) => {
         //res.json({firstname, lastname, username, id, email}); 
         res.json(userData); 
     } catch (error) {
-        res.status(400).json(error);
+        next(error);
         
     }
 }

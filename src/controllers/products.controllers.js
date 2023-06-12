@@ -1,37 +1,14 @@
 const Products = require("../models/products.model");
 
-const createProduct = async (req, res) => {
+const createProduct = async (req, res,next) => {
     try {
         const newProduct = req.body;
         await Products.create(newProduct);
-        /*if(typeof(username) != "string" || !username) {
-            return res.status(400).json({
-                error: "invalid username",
-                message: "username most be just a string"
-            })
-        }
-        if(typeof(email) != "string" || !email) {
-            return res.status(400).json({
-                error: "invalid email",
-                message: "email most be just a string"
-            })
-        }
-        if(typeof(password) != "string" || !password) {
-            return res.status(400).json({
-                error: "invalid password",
-                message: "password most be just a string"
-            })
-        }
-
-        const hashed = await bcrypt.hash(password,10);
-
-        await Users.create({username, email, password: hashed});*/
         res.status(201).send();
       
         
     } catch (error) {
-        console.log(error);
-        res.status(400).json(error);
+        next(error);
     }
 }
 

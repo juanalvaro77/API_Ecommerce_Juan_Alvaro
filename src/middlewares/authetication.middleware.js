@@ -5,8 +5,10 @@ const authenticate = (req, res, next) => {
 
         const token = req.headers["acces-token"];
         if (!token) {
-            res.status(401).json({
-                error: "No token provided",
+            return next({
+                status: 401,
+                name: "No token",
+                message: "Token is not present on headers request"
             })
         }
 
@@ -18,7 +20,11 @@ const authenticate = (req, res, next) => {
         next();
         
     } catch (error) {
-        res.status(401).json(error);
+        next({
+            status: 498,
+            name: "Invalid or expired token",
+            message: error
+        })
     }
 }
 
