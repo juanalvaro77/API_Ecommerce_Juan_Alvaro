@@ -7,7 +7,7 @@ const errorRoutes = require("./routes/errors.routes");
 
 const app = express();
 const PORT = process.env.PORT || 8000;
-
+//ESTA ES UNA PRUEBA
 db.authenticate()
     .then(()=>console.log("BD conectada"))
     .catch((err)=>console.log("Fallo al conectar BD"));

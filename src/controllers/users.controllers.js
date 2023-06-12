@@ -1,6 +1,7 @@
 const Users = require("../models/users.model");
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
+const transporter = require("../utils/mailer");
 
 /*1. un endpoint para crear usuarios*/
 
@@ -9,6 +10,15 @@ const createUser = async (req, res, next) => {
         const {username, email, password} = req.body;
         const hashed = await bcrypt.hash(password,10);
         await Users.create({username, email, password: hashed});
+        transporter.sendMail({
+                from: "tecnologicapereira2015@gmail.com",
+                to: email,
+                subject: "Bienvenido a API Ecommerce",
+                text: "Plaintext version of the message",
+                html: "<h1>Su cuenta ha sido creada</h1>"
+              })
+        .then(()=>console.log("Mensaje enviado"))
+        .catch((error)=>console.log(error))
         res.status(201).send();
       
         
