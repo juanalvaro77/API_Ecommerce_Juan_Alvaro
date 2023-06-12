@@ -2,7 +2,10 @@ const express = require("express");
 require("dotenv").config();
 const db = require("./utils/database");
 const userRoutes = require("./routes/users.router");
+const productRoutes = require("./routes/products.router");
 const cors = require("cors");
+const errorHandler = require("./middlewares/errorHandler.middleware");
+const logError = require("./middlewares/logError.middleware");
 
 const app = express();
 const PORT = process.env.PORT || 8000;
@@ -25,7 +28,15 @@ app.get("/", (req,res)=>{
 });
 
 app.use(userRoutes);
+app.use(productRoutes);
+app.use(logError);
+app.use(errorHandler);
 
+app.use("*", (req,res)=>{
+    res.status(404).json({
+        message: "En contrucción"
+    })
+})
 app.listen(PORT, ()=>{
     console.log(`Servidor escuchando puerto ${PORT}`);
 });

@@ -1,14 +1,31 @@
-const Users = require("../models/users.model");
-const bcrypt = require("bcrypt");
-const jwt = require("jsonwebtoken");
+const Products = require("../models/products.model");
 
-/*1. un endpoint para crear usuarios*/
-
-const createUser = async (req, res, next) => {
+const createProduct = async (req, res) => {
     try {
-        const {username, email, password} = req.body;
+        const newProduct = req.body;
+        await Products.create(newProduct);
+        /*if(typeof(username) != "string" || !username) {
+            return res.status(400).json({
+                error: "invalid username",
+                message: "username most be just a string"
+            })
+        }
+        if(typeof(email) != "string" || !email) {
+            return res.status(400).json({
+                error: "invalid email",
+                message: "email most be just a string"
+            })
+        }
+        if(typeof(password) != "string" || !password) {
+            return res.status(400).json({
+                error: "invalid password",
+                message: "password most be just a string"
+            })
+        }
+
         const hashed = await bcrypt.hash(password,10);
-        await Users.create({username, email, password: hashed});
+
+        await Users.create({username, email, password: hashed});*/
         res.status(201).send();
       
         
@@ -18,7 +35,7 @@ const createUser = async (req, res, next) => {
     }
 }
 
-//Ver todos los usuarios
+/*Ver todos los usuarios
 const getAllUsers = async (req, res, next)=>{
     try{
         const users = await Users.findAndCountAll();
@@ -43,26 +60,25 @@ const deleteUser = async (req, res, next)=>{
 }
 
 //Login
-const userLogin = async (req,res,next) => {
+const userLogin = async (req,res) => {
     try {
         const {email, password} = req.body;
         const user = await Users.findOne({
             where:{email}
         })
         if(!user) {
-            return next({
-                status: 400,
-                error: "Invalid email",
-                message: "email not exist"
-                });
+            return res.status(400).json(
+                {
+                    error: "Invalid email",
+                    message: "email not exist"
+                }
+            )
         }
         const validPassword = await bcrypt.compare(password, user.password);
 
         if(!validPassword){
-            return netx({
-                status: 400,
-                name: "invalid password",
-                message: "Invalid password, Don`t can continue"
+            return res.status(400).json({
+                message: "Don`t can continue"
             });
         }
 
@@ -79,13 +95,13 @@ const userLogin = async (req,res,next) => {
         res.status(400).json(error);
         
     }
-}
+}*/
 
 
 
 module.exports = {
-    createUser,
-    getAllUsers,
-    deleteUser,
-    userLogin
+    createProduct,
+    //getAllUsers,
+    //deleteUser,
+    //userLogin
 }
