@@ -10,17 +10,11 @@ module.exports = {
         type: Sequelize.INTEGER
       },
       role: {
-        type: Sequelize.STRING
-      },
-      createdAt: {
+        type: Sequelize.STRING(30),
         allowNull: false,
-        type: Sequelize.DATE
-      },
-      updatedAt: {
-        allowNull: false,
-        type: Sequelize.DATE
+        unique: true
       }
-    });
+    },{timestamps: false});
   },
   async down(queryInterface, Sequelize) {
     await queryInterface.dropTable('roles');

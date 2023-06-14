@@ -13,10 +13,18 @@ module.exports = {
         type: Sequelize.INTEGER
       },
       userId: {
-        type: Sequelize.INTEGER
+        type: Sequelize.INTEGER,
+        allowNull: false,
+        field: "user_id",
+        references: {
+              model: "users",
+              key: 'id'
+            }
       },
       statusId: {
-        type: Sequelize.INTEGER
+        type: Sequelize.INTEGER,
+        allowNull: false,
+        field: "status_id"
       },
       createdAt: {
         allowNull: false,

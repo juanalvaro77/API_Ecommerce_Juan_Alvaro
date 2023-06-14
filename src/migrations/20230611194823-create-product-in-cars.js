@@ -10,19 +10,35 @@ module.exports = {
         type: Sequelize.INTEGER
       },
       carId: {
-        type: Sequelize.INTEGER
+        type: Sequelize.INTEGER,
+        allowNull: false,
+        field: "car_id",
+        references: {
+              model: "cars",
+              key: 'id'
+            }
       },
-      productd: {
-        type: Sequelize.INTEGER
+      productId: {
+        type: Sequelize.INTEGER,
+        allowNull: false,
+        field: "product_id",
+        references: {
+              model: "products",
+              key: 'id'
+            }
       },
       quantity: {
-        type: Sequelize.INTEGER
+        type: Sequelize.INTEGER,
+        allowNull: false
       },
       price: {
-        type: Sequelize.INTEGER
+        type: Sequelize.INTEGER,
+        allowNull: false
       },
       statusId: {
-        type: Sequelize.INTEGER
+        type: Sequelize.INTEGER,
+        allowNull: false,
+        field: "status_id"
       },
       createdAt: {
         allowNull: false,

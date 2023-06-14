@@ -10,17 +10,10 @@ module.exports = {
         type: Sequelize.INTEGER
       },
       status: {
-        type: Sequelize.STRING
-      },
-      createdAt: {
-        allowNull: false,
-        type: Sequelize.DATE
-      },
-      updatedAt: {
-        allowNull: false,
-        type: Sequelize.DATE
+        type: Sequelize.STRING,
+        allowNull: false
       }
-    });
+    },{timestamps:false});
   },
   async down(queryInterface, Sequelize) {
     await queryInterface.dropTable('statuses');

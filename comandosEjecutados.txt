@@ -1,0 +1,9 @@
+npx sequelize db:create (crear una base de datos)                   Crea Base de datos
+npx sequelize-cli model:generate --name users --attributes username:string,email:string,password:string,avatar:string,roleId:integer
+npx sequelize-cli model:generate --name products --attributes name:string,description:string,price:string,availableQty:integer,status:integer,userId:integer,productImage:string
+npx sequelize-cli model:generate --name cars --attributes userId:integer,totalPrice:integer
+npx sequelize-cli model:generate --name productInCars --attributes carId:integer,productId:integer,quantity:integer,price:integer,statusId:integer
+npx sequelize-cli model:generate --name status --attributes status:string
+npx sequelize-cli model:generate --name roles --attributes role:string
+npx sequelize-cli model:generate --name orders --attributes totalPrice:integer,userId:integer,statusId:integer
+npx sequelize-cli model:generate --name ProductInOrder --attributes orderId:integer,productId:integer,quantity:integer,price:integer
